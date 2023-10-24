@@ -2,5 +2,10 @@
   "name": "Planday-test",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.8.8"
+  },
+  "scripts": {}
 }
