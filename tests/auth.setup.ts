@@ -6,8 +6,10 @@ setup("authenticate", async ({ page }) => {
   await page.goto("https://qa-challenge-d.planday.com/");
   await page
     .getByRole("textbox", { name: "Username" })
-    .fill("zydrune.lisauskaite@gmail.com");
-  await page.getByLabel("Password", { exact: true }).fill("Testing1234!");
+    .fill("zydrune.lisauskaite@gmail.com", { force: true });
+  await page
+    .getByLabel("Password", { exact: true })
+    .fill("Testing1234!", { force: true });
   await page.getByRole("button", { name: "Log in" }).click({ force: true });
   // Wait until the page receives the cookies.
   // Wait for the final URL to ensure that the cookies are actually set.

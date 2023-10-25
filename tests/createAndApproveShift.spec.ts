@@ -63,4 +63,14 @@ test("Successfully add a shift and approve it", async ({ page }) => {
   ).toBeVisible();
 
   await page.getByRole("button", { name: "Delete" }).click();
+
+  await expect(page.locator(".edit-shift-modal")).toContainText("Delete shift");
+
+  const shiftListUpdatePromise2 = page.waitForResponse(
+    "https://scheduling-shift-api.prod-westeurope.planday.cloud/schedules/**/shifts/intervals"
+  );
+
+  await page.getByRole("button", { name: "Delete" }).click();
+
+  await shiftListUpdatePromise2;
 });
