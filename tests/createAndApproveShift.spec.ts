@@ -30,13 +30,13 @@ test("Successfully add a shift and approve it", async ({ page }) => {
   await page.locator("#shiftStartEnd_start").fill("9");
   await page.locator("#shiftStartEnd_end").fill("17");
 
-  const responsePromise1 = page.waitForResponse(
+  const shiftCreatePromise = page.waitForResponse(
     "https://scheduling-shift-api.prod-westeurope.planday.cloud/schedules/**/shifts/"
   );
 
   await page.getByRole("button", { name: "Create" }).click();
 
-  await responsePromise1;
+  await shiftCreatePromise;
 
   await employeeShift.click({ position: { x: 0, y: 0 } });
 
@@ -44,14 +44,14 @@ test("Successfully add a shift and approve it", async ({ page }) => {
     page.getByRole("heading", { name: formattedDate })
   ).toBeVisible();
 
-  const responsePromise2 = page.waitForResponse(
+  const shiftListUpdatePromise = page.waitForResponse(
     "https://scheduling-shift-api.prod-westeurope.planday.cloud/schedules/**/shifts/intervals"
   );
 
   await page.locator(".switch").click();
   await page.getByRole("button", { name: "Save" }).click();
 
-  await responsePromise2;
+  await shiftListUpdatePromise;
 
   expect(employeeShift).toContainText("Approved");
 
